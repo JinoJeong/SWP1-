@@ -5,12 +5,12 @@ def application(environ, start_response):
     d = parse_qs(environ['QUERY_STRING'])
     a = d.get('a', [''])[0]
     b = d.get('b', [''])[0]
-    if '' not in [a, b] :
+    try:
         a,b = int(a), int(b)
         sum = a+b
         multi = a*b
 
-    else :
+    except ValueError :
         sum = ''
         multi = ''
     response_body = html % {'sum' : sum, 'multi' : multi}
